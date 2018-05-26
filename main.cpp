@@ -79,14 +79,14 @@ const vector<string> explode(const string& linea)
 
 	return v;
 }
-void indices(string carpeta,int cantidadC)
+void indices(string carpeta,int cantidadC,int PosiIndice)
 {
     string linea;
     ofstream indi("indices/"+carpeta+".txt", ofstream::out);
     bool prueba=true;
     for(int i=0;i<cantidadC;i++)
     {
-        string url=("google/"+carpeta+"/part-"+numero(i)+"-of-00500.csv");
+        string url=("google/"+carpeta+"/part-"+numero(i)+"-of-"+numero(cantidadC)+".csv");
         ifstream archivo (url);
         if (archivo == NULL)
         {
@@ -100,7 +100,7 @@ void indices(string carpeta,int cantidadC)
                 getline(archivo,linea,'\n');
                 if(linea=="")break;
                 vector<string> v{explode(linea)};
-                indice.push_back(v[2]);
+                indice.push_back(v[PosiIndice]);
             }
         }
         for(auto n:indice) indi<<n<<endl;
@@ -111,7 +111,7 @@ void indices(string carpeta,int cantidadC)
 
 int main()
 {
-    indices("job_events",500);
+    indices("job_events",500,2);
 
 
 
