@@ -4,8 +4,66 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
-using namespace std;
+#include <windows.h>
 
+using namespace std;
+vector<string> indice;
+
+
+
+string numero(int n)
+{
+    vector<char> hola={'0','0','0','0','0'};
+    vector<int> nums;
+    string num{""};
+    char nchar;
+    if(n<=9)
+    {
+        nchar=n+48;
+        hola[hola.size()-1]=nchar;
+    }
+    else
+    {
+        if(n<=99)
+        {
+            for(int i=0;i<2;i++)
+            {
+                int aux=n%10;
+                hola[hola.size()-1-i]=aux+48;
+                n=n/10;
+            }
+        }
+        else if(n<=999)
+        {
+            for(int i=0;i<3;i++)
+            {
+                int aux=n%10;
+                hola[hola.size()-1-i]=aux+48;
+                n=n/10;
+            }
+        }
+        else if(n<=9999)
+        {
+            for(int i=0;i<4;i++)
+            {
+                int aux=n%10;
+                hola[hola.size()-1-i]=aux+48;
+                n=n/10;
+            }
+        }
+        else if(n<=99999)
+        {
+            for(int i=0;i<5;i++)
+            {
+                int aux=n%10;
+                hola[hola.size()-1-i]=aux+48;
+                n=n/10;
+            }
+        }
+    }
+    for(auto n:hola) num+=n;
+    return num;
+}
 const vector<string> explode(const string& linea)
 {
 	string buff{""};
@@ -21,33 +79,42 @@ const vector<string> explode(const string& linea)
 
 	return v;
 }
-vector<string> indices()
+void indices(string carpeta,int cantidadC)
 {
-    vector<string> indice;
     string linea;
+    ofstream indi("indices/"+carpeta+".txt", ofstream::out);
     bool prueba=true;
-    ifstream archivo ("google/part-00000-of-00500.csv");
-	if (archivo == NULL)
+    for(int i=0;i<cantidadC;i++)
     {
-         printf("Error al abrir el archivo");
-    }
-    else
-    {
-        while(true)
+        string url=("google/"+carpeta+"/part-"+numero(i)+"-of-00500.csv");
+        ifstream archivo (url);
+        if (archivo == NULL)
         {
-            getline(archivo,linea,'\n');
-            if(linea=="")break;
-            vector<string> v{explode(linea)};
-            indice.push_back(v[2]);
+             printf("Error al abrir el archivo");
         }
+        else
+        {
+            indice.push_back("----------DIVISION-------------");
+            while(true)
+            {
+                getline(archivo,linea,'\n');
+                if(linea=="")break;
+                vector<string> v{explode(linea)};
+                indice.push_back(v[2]);
+            }
+        }
+        for(auto n:indice) indi<<n<<endl;
+        indice.clear();
     }
-    return indice;
+	indi.close();
 }
+
 int main()
 {
-	vector<string> indice;
-	indice=indices();
-    for(auto n:indice)cout<<n<<endl;
+    indices("job_events",500);
+
+
+
     return 0;
 }
 
