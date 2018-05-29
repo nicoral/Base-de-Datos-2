@@ -64,16 +64,17 @@ string numero(int n)
     for(auto n:hola) num+=n;
     return num;
 }
-const vector<string> explode(const string& linea)
+const vector<string> explode(const string& linea,int indi)
 {
 	string buff{""};
 	vector<string> v;
     const char& c=',';
-	for(int i=0;i<linea.length();i++)
+    int cont=0;
+	for(int i=0;i<linea.length() && cont<=indi;i++)
 	{
 		if(linea[i]!= c) buff+=linea[i];
-		if(linea[i] == c && buff != "") { v.push_back(buff); buff = ""; }
-		if(linea[i] == c && linea[i-1]==c){v.push_back("0");}
+		if(linea[i] == c && buff != "") { v.push_back(buff); buff = "";cont++; }
+		if(linea[i] == c && linea[i-1]==c){v.push_back("0");cont++;}
 	}
 	if(buff != "") v.push_back(buff);
 
@@ -99,7 +100,7 @@ void indices(string carpeta,int cantidadC,int PosiIndice)
             {
                 getline(archivo,linea,'\n');
                 if(linea=="")break;
-                vector<string> v{explode(linea)};
+                vector<string> v{explode(linea,PosiIndice)};
                 indice.push_back(v[PosiIndice]);
             }
         }
@@ -112,9 +113,6 @@ void indices(string carpeta,int cantidadC,int PosiIndice)
 int main()
 {
     indices("job_events",500,2);
-
-
-
     return 0;
 }
 
