@@ -1,2 +1,8 @@
 
-Aqui se subiran las refeencias o Documentos que consultemos
+Aqui se subiran las referencias o Documentos que consultemos
+
+LIBRERIAS USADAS:
+
+1) #include <fstream>
+-manejo de ficheros 
+
