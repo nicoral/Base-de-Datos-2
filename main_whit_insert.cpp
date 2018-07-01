@@ -187,13 +187,9 @@ void *insertar(string archivo,int cant,string datos)
         }
         else
         {
-            ///int n=atoll(linea);
-            ///is.seekg(n,ios::beg);
-            ///is.getline(linea,1000);
             is<<datos;
           //  cout<<"Se inserto"<<endl;
         }
-        //return ("NO SE ENCONTRO INDICE A BUSCAR!!!!GG");
 }
 
 int main()
