@@ -73,76 +73,93 @@ string select(string ID,string carpeta)
     else
         return "No se tiene la tabla a buscar.";
 }
-void swapi(pair<long long int,long long int> &a,pair<long long int,long long int> &b){
-    pair<long long int,long long int> temp;
-    temp=a;
-    a=b;
-    b=temp;
-}
-void insertSort(vector<pair<long long int,long long int>> &v,int ini,int fin)
-{
-    int j, temp,tam=v.size();
-	for (int i=0;i<tam; i++)
-    {
-		j = i;
-		while (j>0 && v[j]<v[j-1])
-        {
-            swap(v[j],v[j-1]);
-            j--;
-        }
-    }
-}
-void indicesOrde(string nombre)
-{
-    char* n1=new char[1000];
-    char* n2=new char[1000];
-    pair<long long int,long long int> tem;
-    long long int n,y;
-    vector<pair<long long int,long long int> > vec;
-    ifstream is("indices/machine_attributes.txt",std::fstream::binary);
 
-    if (!is)
+struct datos
+{
+    long long int ID;
+    int Posicio;
+    int PArchivo;
+};
+void indicesX(string carpeta)
+{
+    char *linea=new char[1000];
+    long int posi=0,posicion,cont=0;
+    int c=0;
+    vector<Datos> ID;
+    vector<long int> posicione;
+    vector<long int> Aposicione;
+    priority_queue<Datos, vector<Datos>,less<vector<Datos>::value_type> > pqdatos1;
+    for(int i=0;i<500;i++)
     {
-        cout<<"Error al abrir el archivo"<<endl;
-    }
-    else
-    {
-        while(!is.eof())
+        cout<<ID.size()<<endl;
+        string num=numero(i);
+        string url=("google/"+carpeta+"/part-"+num+"-of-00500.csv");
+        ifstream archivo (url,std::fstream::binary);
+        if (archivo == NULL)
         {
-            is.getline(n1,10000,',');
-            if(n1=="DIVISION")
-                is.getline(n1,10000);
-            else
+             cout<<"Error al abrir el archivo"<<endl;
+             break;
+        }
+        else
+        {
+            posicion=archivo.tellg();
+            while(!archivo.eof() )
             {
-                n=atoll(n1);
-                is.getline(n2,10000);
-                tem.first=n;
-                y=atol(n2);
-                tem.second=y;
-                vec.push_back(tem);
+                if(posi!=3)
+                {
+                    archivo.getline(linea,1000,',');
+                    posi++;
+                }
+                else
+                {
+                    long long int dato=atoll(linea);
+                    Datos neew(dato,posicion,i);
+                    ID.push_back(neew);
+                    if(ID.size()>20000000)
+                    {
+                        cout<<"entro aqui"<<endl;
+                        sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
+                        ofstream indi("indices/N"+carpeta+"-"+numero(c)+".txt");
+                        for(int i=0;i<ID.size();i++)
+                            indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
+                        indi.close();
+                        ID.clear();
+                        c++;
+                    }
+                    archivo.getline(linea,1000);
+                    posicion=archivo.tellg();
+                    posi=0;
+                }
             }
         }
     }
-    insertSort(vec,0,vec.size());
-    for(int i=0;i<vec.size();i++)
-        cout<<vec[i].first<<","<<vec[i].second<<endl;
+     sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
+    ofstream indi("indices/N"+carpeta+"-"+numero(c)+".txt");
+    for(int i=0;i<ID.size();i++)
+        indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
+	indi.close();
 }
+
+
 int main()
 {
-    ///indices("machine_events");
-    ///indicesOrde("nana");
+    ///indicesX("task_events");
+    int opc;
+    while(true)
+    {
+        cin>>opc;
+        if(opc==3)
+        {
+            string archivo;
+            cin>>archivo;
+            indices(archivo);
+        }
+        if(opc==1)
+        {
+            break;
+        }
+    }
 
-    cout<<select("4246147567","machine_events");
-    /**long long a;
-    char nume[16]="6176871439";
-    a=atoll(nume);
-    cout<<a;*/
-    /**insertar2(indice,"4865","894","1561");
-    insertar2(indice,"4891","484","1561");
-    insertar2(indice,"2313","12313","1231");
-    insertar2(indice,"1231","32131","12313");
-    */
-    ///imprimir(tem);
     return 0;
 }
 

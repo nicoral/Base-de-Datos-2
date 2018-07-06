@@ -1,6 +1,6 @@
-#include "includes.h"
+#include "Hash.h"
 #include "FBasicas.h"
-
+#include "PrymariQueue.h"
 class job_events
 {
 public:
@@ -16,6 +16,7 @@ public:
     int cantidad=500;
     string archivo="job_events";
     int indice=3;
+    int datos=2012242;
     void indicesJE();
     char *selectJE(string ID);
 };
@@ -94,6 +95,7 @@ public:
     int indice=3;
 
     void indicesTE();
+    void indices2TE();
     char *selectTE(string ID);
 };
 

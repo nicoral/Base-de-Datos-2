@@ -34,6 +34,9 @@
 		</Compiler>
 		<Unit filename="EArbol.h" />
 		<Unit filename="FBasicas.h" />
+		<Unit filename="Hash.h" />
+		<Unit filename="PrymariQueue.h" />
+		<Unit filename="Select.h" />
 		<Unit filename="Tablas.h" />
 		<Unit filename="includes.h" />
 		<Unit filename="indices.h" />
