@@ -52,7 +52,7 @@ public:
     int indice=2;
 
     void indicesME();
-    char *selectME(string ID);
+    string selectME(string ID);
 };
 class task_constraints
 {

@@ -40,6 +40,7 @@ void indices(string carpeta)
 string select(string ID,string carpeta)
 {
     string respuesta;
+    vector<string> res;
     if(carpeta=="job_events")
     {
         job_events A;
@@ -74,24 +75,16 @@ string select(string ID,string carpeta)
         return "No se tiene la tabla a buscar.";
 }
 
-struct datos
-{
-    long long int ID;
-    int Posicio;
-    int PArchivo;
-};
 void indicesX(string carpeta)
 {
     char *linea=new char[1000];
     long int posi=0,posicion,cont=0;
     int c=0;
     vector<Datos> ID;
-    vector<long int> posicione;
-    vector<long int> Aposicione;
-    priority_queue<Datos, vector<Datos>,less<vector<Datos>::value_type> > pqdatos1;
+    ID.shrink_to_fit();
+
     for(int i=0;i<500;i++)
     {
-        cout<<ID.size()<<endl;
         string num=numero(i);
         string url=("google/"+carpeta+"/part-"+num+"-of-00500.csv");
         ifstream archivo (url,std::fstream::binary);
@@ -115,7 +108,7 @@ void indicesX(string carpeta)
                     long long int dato=atoll(linea);
                     Datos neew(dato,posicion,i);
                     ID.push_back(neew);
-                    if(ID.size()>20000000)
+                    if(ID.size()>33461309)
                     {
                         cout<<"entro aqui"<<endl;
                         sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
@@ -133,7 +126,7 @@ void indicesX(string carpeta)
             }
         }
     }
-     sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
+    sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
     ofstream indi("indices/N"+carpeta+"-"+numero(c)+".txt");
     for(int i=0;i<ID.size();i++)
         indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
@@ -143,7 +136,8 @@ void indicesX(string carpeta)
 
 int main()
 {
-    ///indicesX("task_events");
+    //indicesX("task_events");
+
     int opc;
     while(true)
     {
@@ -154,12 +148,17 @@ int main()
             cin>>archivo;
             indices(archivo);
         }
-        if(opc==1)
+        else if(opc==2)
+        {
+            string ID,archivo;
+            cin>>ID>>archivo;
+            cout<<select(ID,archivo);
+        }
+        else if(opc==1)
         {
             break;
         }
     }
-
     return 0;
 }
 
