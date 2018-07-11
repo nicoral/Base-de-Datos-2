@@ -75,86 +75,34 @@ string select(string ID,string carpeta)
         return "No se tiene la tabla a buscar.";
 }
 
-void indicesX(string carpeta)
-{
-    char *linea=new char[1000];
-    long int posi=0,posicion,cont=0;
-    int c=0;
-    vector<Datos> ID;
-    ID.shrink_to_fit();
-
-    for(int i=0;i<500;i++)
-    {
-        string num=numero(i);
-        string url=("google/"+carpeta+"/part-"+num+"-of-00500.csv");
-        ifstream archivo (url,std::fstream::binary);
-        if (archivo == NULL)
-        {
-             cout<<"Error al abrir el archivo"<<endl;
-             break;
-        }
-        else
-        {
-            posicion=archivo.tellg();
-            while(!archivo.eof() )
-            {
-                if(posi!=3)
-                {
-                    archivo.getline(linea,1000,',');
-                    posi++;
-                }
-                else
-                {
-                    long long int dato=atoll(linea);
-                    Datos neew(dato,posicion,i);
-                    ID.push_back(neew);
-                    if(ID.size()>33461309)
-                    {
-                        cout<<"entro aqui"<<endl;
-                        sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
-                        ofstream indi("indices/N"+carpeta+"-"+numero(c)+".txt");
-                        for(int i=0;i<ID.size();i++)
-                            indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
-                        indi.close();
-                        ID.clear();
-                        c++;
-                    }
-                    archivo.getline(linea,1000);
-                    posicion=archivo.tellg();
-                    posi=0;
-                }
-            }
-        }
-    }
-    sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
-    ofstream indi("indices/N"+carpeta+"-"+numero(c)+".txt");
-    for(int i=0;i<ID.size();i++)
-        indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
-	indi.close();
-}
-
 
 int main()
 {
-    //indicesX("task_events");
-
     int opc;
+    cout<<"---BIENVENIDOS A NUESTRO MOTOR DE BASE DE DATOS---"<<endl;
     while(true)
     {
+        cout<<"1.- Indexar una tabla:"<<endl;
+        cout<<"2.- Seleccionar por indice"<<endl;
+        cout<<"3.- Exit"<<endl;
         cin>>opc;
-        if(opc==3)
+        if(opc==1)
         {
             string archivo;
+            cout<<"Ingrese tabla a indexar"<<endl;
             cin>>archivo;
             indices(archivo);
+            cout<<"Indexacion Realizada Correctamente :3"<<endl;
         }
         else if(opc==2)
         {
             string ID,archivo;
+            cout<<"Ingrese indice seguido de la tabla que desea seleccionar"<<endl;
             cin>>ID>>archivo;
             cout<<select(ID,archivo);
+            cout<<"Seleccion hecha correctamente :3"<<endl;
         }
-        else if(opc==1)
+        else if(opc==3)
         {
             break;
         }
