@@ -1,5 +1,5 @@
 #include "includes.h"
-#include "Select.h"
+#include "update.h"
 #include "EArbol.h"
 
 
@@ -68,13 +68,44 @@ string select(string ID,string carpeta)
     else if(carpeta=="task_events")
     {
         task_events A;
-        respuesta=A.selectTE(ID);
+        ///A.selectTE(ID);
         return respuesta;
     }
     else
         return "No se tiene la tabla a buscar.";
 }
-
+string update(string ID,string c2,string carpeta)
+{
+    string respuesta;
+    vector<string> res;
+    if(carpeta=="job_events")
+    {
+        job_events A;
+        A.update(ID,c2);
+    }
+    else if(carpeta=="machine_attributes")
+    {
+        machine_attributes A;
+        A.update(ID,c2);
+    }
+    else if(carpeta=="machine_events")
+    {
+        machine_events A;
+        A.update(ID,c2);
+    }
+    else if(carpeta=="task_constraints")
+    {
+        task_constraints A;
+        A.update(ID,c2);
+    }
+    else if(carpeta=="task_events")
+    {
+        task_events A;
+        A.update(ID,c2);
+    }
+    else
+        return "No se tiene la tabla a buscar.";
+}
 
 int main()
 {
@@ -83,8 +114,9 @@ int main()
     while(true)
     {
         cout<<"1.- Indexar una tabla:"<<endl;
-        cout<<"2.- Seleccionar por indice"<<endl;
-        cout<<"3.- Exit"<<endl;
+        cout<<"2.- Seleccionar por indice de una tabla:"<<endl;
+        cout<<"3.- Actualizar datos de una tabla:"<<endl;
+        cout<<"4.- Exit:"<<endl;
         cin>>opc;
         if(opc==1)
         {
@@ -103,6 +135,14 @@ int main()
             cout<<"Seleccion hecha correctamente :3"<<endl;
         }
         else if(opc==3)
+        {
+            string ID,C2,archivo;
+            cout<<"Ingrese indice seguido del segundo campo y despues la tabla que desea actualizar"<<endl;
+            cin>>ID>>C2>>archivo;
+            cout<<update(ID,C2,archivo);
+            cout<<"Actualizacion hecha correctamente :3"<<endl;
+        }
+        else if(opc==4)
         {
             break;
         }

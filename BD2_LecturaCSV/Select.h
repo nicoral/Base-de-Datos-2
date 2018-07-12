@@ -26,6 +26,10 @@ char *job_events::selectJE(string ID)
                 encontrado=true;
                 break;
             }
+            else if(ID>ids)
+            {
+                break;
+            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -79,6 +83,10 @@ char *machine_attributes::selectMA(string ID)
             {
                 HashKey.getline(linea,10000);
                 encontrado=true;
+                break;
+            }
+            else if(ID>ids)
+            {
                 break;
             }
             else
@@ -136,6 +144,10 @@ string machine_events::selectME(string ID)
                 encontrado=true;
                 break;
             }
+            else if(ID>ids)
+            {
+                break;
+            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -191,6 +203,10 @@ char *task_constraints::selectTC(string ID)
                 encontrado=true;
                 break;
             }
+            else if(ID>ids)
+            {
+                break;
+            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -221,50 +237,91 @@ char *task_constraints::selectTC(string ID)
 
     }
 }
-char *task_events::selectTE(string ID)
+char *task_events::selectTE(char* ID)
 {
     char *linea=new char[10000];
     int divi=0;
-    string ids;
+    long long int IDn=atoll(ID),aux=-1,aux2;
+    char* ids=new char[1000];
     bool encontrado=false;
-    ifstream csv("indices/"+this->archivo+".txt",std::fstream::binary);
-    if (!csv)
+    for(int i=0;i<5;i++)
     {
-        return "No se encuentra la tabla a buscar";
-    }
-    else
-    {
-        while(!csv.eof())
+        ifstream csv("indices/"+this->archivo+"/ClusterKey-"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
+        if (!csv)
         {
-            csv.getline(linea,10000,',');
-            ids=linea;
-            if(ID==ids)
-            {
-                csv.getline(linea,10000);
-                encontrado=true;
-                break;
-            }
-            else if(ids=="DIVISION")
-                divi++;
-            else
-                csv.getline(linea,10000);
+            return "No se encuentra la tabla a buscar";
         }
-        if(encontrado)
+        else
         {
-            ifstream is("google/"+this->archivo+"/part-"+numero(divi)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
-            if (!is)
+            while(!csv.eof())
             {
-                return "Error al abrir el archivo";
-            }
-            else
+
+                csv.getline(linea,10000,',');
+                ids=linea;
+                aux=atoll(ids);
+                if(IDn<=aux)
+                {
+                    csv.getline(linea,1000,',');
+                    aux2=atoll(linea);
+                }
+                else
+                {
+                    ifstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
+                    indi.seekg(aux2,ios::beg);
+                    while(IDn<aux && !indi.eof())
+                    {
+                        indi.getline(linea,1000,',');
+                        aux2=atoll(linea);
+                        if(IDn==aux2)
+                        {
+                            encontrado=true;
+                            break;
+                        }
+                        else
+                        {
+                            indi.getline(linea,1000);
+                        }
+                    }
+                    if(encontrado)
+                        break;
+                    else if(indi.eof())
+                    {
+                        ifstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
+                        indi.seekg(aux2,ios::beg);
+                        while(IDn<aux && !indi.eof())
+                        {
+                            indi.getline(linea,1000,',');
+                            aux2=atoll(linea);
+                            if(IDn==aux2)
+                            {
+                                encontrado=true;
+                                break;
+                            }
+                            else
+                            {
+                                indi.getline(linea,1000);
+                            }
+                        }
+                    }
+                }
+            }//Seguir desde aqui!!!
+            if(encontrado)
             {
-                int n=atoll(linea);
-                is.seekg(n,ios::beg);
-                ///is.getline(linea,1000);
-                is>>linea;
-                return linea;
+                ifstream is("google/"+this->archivo+"/part-"+numero(divi)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
+                if (!is)
+                {
+                    return "Error al abrir el archivo";
+                }
+                else
+                {
+                    int n=atoll(linea);
+                    is.seekg(n,ios::beg);
+                    ///is.getline(linea,1000);
+                    is>>linea;
+                    return linea;
+                }
             }
+            return ("NO SE ENCONTRO INDICE A BUSCAR!!!!GG");
         }
-        return ("NO SE ENCONTRO INDICE A BUSCAR!!!!GG");
     }
 }

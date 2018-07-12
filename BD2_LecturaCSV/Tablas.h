@@ -19,6 +19,7 @@ public:
     int datos=2012242;
     void indicesJE();
     char *selectJE(string ID);
+    void update(string ID,string C2);
 };
 class machine_attributes
 {
@@ -35,6 +36,7 @@ public:
     int indice=2;
     void indicesMA();
     char *selectMA(string ID);
+    void update(string ID,string C2);
 };
 class machine_events
 {
@@ -53,6 +55,7 @@ public:
 
     void indicesME();
     string selectME(string ID);
+    void update(string ID,string C2);
 };
 class task_constraints
 {
@@ -71,6 +74,7 @@ public:
 
     void indicesTC();
     char *selectTC(string ID);
+    void update(string ID,string C2);
 };
 class task_events
 {
@@ -96,7 +100,8 @@ public:
 
     void indicesTE();
     void indices2TE();
-    char *selectTE(string ID);
+    char *selectTE(char* ID);
+    void update(string ID,string C2);
 };
 
 
