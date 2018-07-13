@@ -84,3 +84,13 @@ const vector<string> explodeFull(const string& linea)
 
 	return v;
 }
+bool esNumero(char* num)
+{
+
+    for(int i=0;i<strlen(num);i++)
+    {
+        if (!isdigit(num[i]))
+            return false;
+    }
+    return true;
+}

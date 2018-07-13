@@ -109,7 +109,7 @@ string update(string ID,string c2,string carpeta)
 
 int main()
 {
-    int opc;
+    /**int opc;
     cout<<"---BIENVENIDOS A NUESTRO MOTOR DE BASE DE DATOS---"<<endl;
     while(true)
     {
@@ -146,7 +146,8 @@ int main()
         {
             break;
         }
-    }
+    }*/
+
     return 0;
 }
 
