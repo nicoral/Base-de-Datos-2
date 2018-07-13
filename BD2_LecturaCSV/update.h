@@ -1,6 +1,6 @@
 #include "Select.h"
 
-string job_events::update(string ID,string C2)
+string job_events::update(string ID)
 {
     char *linea=new char[10000];
     char *seg=new char[10000];
@@ -87,19 +87,19 @@ string job_events::update(string ID,string C2)
         }
     }
 }
-string machine_attributes::update(string ID,string C2)
+string machine_attributes::update(string ID)
 {
 
 }
-string machine_events::update(string ID,string C2)
+string machine_events::update(string ID)
 {
 
 }
-string task_constraints::update(string ID,string C2)
+string task_constraints::update(string ID)
 {
 
 }
-string task_events::update(string ID,string C2)
+string task_events::update(string ID)
 {
 
 }

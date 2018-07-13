@@ -15,7 +15,7 @@ void task_events::indicesTE()
         if (archivo == NULL)
         {
              cout<<"Error al abrir el archivo"<<endl;
-             break;
+             return;
         }
         else
         {
@@ -102,7 +102,7 @@ void task_constraints::indicesTC()
         if (archivo == NULL)
         {
              cout<<"Error al abrir el archivo"<<endl;
-             break;
+             return;
         }
         else
         {
@@ -141,6 +141,7 @@ void task_constraints::indicesTC()
     }
 	indi.close();
     HashKeys.close();
+    cout<<"Indexacion Realizada Correctamente :3"<<endl;
 }
 void machine_events::indicesME()
 {
@@ -156,7 +157,7 @@ void machine_events::indicesME()
         if (archivo == NULL)
         {
              cout<<"Error al abrir el archivo"<<endl;
-             break;
+             return;
         }
         else
         {
@@ -195,6 +196,7 @@ void machine_events::indicesME()
     }
 	indi.close();
     HashKeys.close();
+    cout<<"Indexacion Realizada Correctamente :3"<<endl;
 }
 void machine_attributes::indicesMA()
 {
@@ -210,7 +212,7 @@ void machine_attributes::indicesMA()
         if (archivo == NULL)
         {
              cout<<"Error al abrir el archivo"<<endl;
-             break;
+             return;
         }
         else
         {
@@ -249,6 +251,7 @@ void machine_attributes::indicesMA()
     }
 	indi.close();
     HashKeys.close();
+    cout<<"Indexacion Realizada Correctamente :3"<<endl;
 }
 void job_events::indicesJE()
 {
@@ -264,7 +267,7 @@ void job_events::indicesJE()
         if (archivo == NULL)
         {
              cout<<"Error al abrir el archivo"<<endl;
-             break;
+             return;
         }
         else
         {
@@ -303,6 +306,7 @@ void job_events::indicesJE()
     }
 	indi.close();
     HashKeys.close();
+    cout<<"Indexacion Realizada Correctamente :3"<<endl;
 }
 
 

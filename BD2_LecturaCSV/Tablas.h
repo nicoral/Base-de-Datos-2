@@ -17,9 +17,14 @@ public:
     string archivo="job_events";
     int indice=3;
     int datos=2012242;
+
+    bool bloqueada=false;
+    void bloquear();
+    void desbloquear();
+    bool Estado();
     void indicesJE();
     char *selectJE(string ID);
-    string update(string ID,string C2);
+    string update(string ID);
 };
 class machine_attributes
 {
@@ -34,9 +39,14 @@ public:
     int cantidad=1;
     string archivo="machine_attributes";
     int indice=2;
+    bool bloqueada=false;
+
+    void bloquear();
+    void desbloquear();
+    bool Estado();
     void indicesMA();
     char *selectMA(string ID);
-    string update(string ID,string C2);
+    string update(string ID);
 };
 class machine_events
 {
@@ -52,10 +62,14 @@ public:
     int cantidad=1;
     string archivo="machine_events";
     int indice=2;
+    bool bloqueada=false;
 
+    void bloquear();
+    void desbloquear();
+    bool Estado();
     void indicesME();
     string selectME(string ID);
-    string update(string ID,string C2);
+    string update(string ID);
 };
 class task_constraints
 {
@@ -71,10 +85,14 @@ public:
     int cantidad=500;
     string archivo="task_constraints";
     int indice=2;
+    bool bloqueada=false;
 
+    void bloquear();
+    void desbloquear();
+    bool Estado();
     void indicesTC();
     char *selectTC(string ID);
-    string update(string ID,string C2);
+    string update(string ID);
 };
 class task_events
 {
@@ -97,11 +115,14 @@ public:
     int cantidad=500;
     string archivo="task_events";
     int indice=3;
-
+    bool bloqueada=false;
+    void bloquear();
+    void desbloquear();
+    bool Estado();
     void indicesTE();
     void indices2TE();
     char *selectTE(char* ID);
-    string update(string ID,string C2);
+    string update(string ID);
 };
 
 

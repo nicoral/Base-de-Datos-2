@@ -11,4 +11,5 @@
 #include <string>
 #include <windows.h>
 #include <algorithm>
+#include <stdio.h>
 using namespace std;
