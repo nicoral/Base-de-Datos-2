@@ -4,7 +4,7 @@
 class job_events
 {
 public:
-    /**int timespamp;
+    int timespamp;
     string missing_info;
     int job_ID;
     string event_type;
@@ -12,7 +12,7 @@ public:
     string scheduling_class;
     string job_name;
     string logical_job_name;
-    */
+
     int cantidad=500;
     string archivo="job_events";
     int indice=3;

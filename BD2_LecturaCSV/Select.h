@@ -26,10 +26,6 @@ char *job_events::selectJE(string ID)
                 encontrado=true;
                 break;
             }
-            else if(ID>ids)
-            {
-                break;
-            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -52,6 +48,7 @@ char *job_events::selectJE(string ID)
                 cout<<linea<<endl;
                 csv.getline(linea,1000,',');
             }
+            return "Seleccion hecha correctamente :3";
         }
         else
         {
@@ -85,10 +82,6 @@ char *machine_attributes::selectMA(string ID)
                 encontrado=true;
                 break;
             }
-            else if(ID>ids)
-            {
-                break;
-            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -111,6 +104,7 @@ char *machine_attributes::selectMA(string ID)
                 cout<<linea<<endl;
                 csv.getline(linea,1000,',');
             }
+            return "Seleccion hecha correctamente :3";
         }
         else
         {
@@ -138,14 +132,11 @@ string machine_events::selectME(string ID)
         {
             HashKey.getline(linea,10000,',');
             ids=linea;
+            cout<<ids<<" "<<ID<<endl;
             if(ID==ids)
             {
                 HashKey.getline(linea,10000);
                 encontrado=true;
-                break;
-            }
-            else if(ID>ids)
-            {
                 break;
             }
             else
@@ -170,6 +161,7 @@ string machine_events::selectME(string ID)
                 cout<<linea<<endl;
                 csv.getline(linea,1000,',');
             }
+            return "Seleccion hecha correctamente :3";
         }
         else
         {
@@ -203,10 +195,6 @@ char *task_constraints::selectTC(string ID)
                 encontrado=true;
                 break;
             }
-            else if(ID>ids)
-            {
-                break;
-            }
             else
                 HashKey.getline(linea,10000);
         }
@@ -229,6 +217,7 @@ char *task_constraints::selectTC(string ID)
                 cout<<linea<<endl;
                 csv.getline(linea,1000,',');
             }
+            return "Seleccion hecha correctamente :3";
         }
         else
         {

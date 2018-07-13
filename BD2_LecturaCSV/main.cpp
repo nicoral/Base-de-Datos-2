@@ -40,7 +40,6 @@ void indices(string carpeta)
 string select(string ID,string carpeta)
 {
     string respuesta;
-    vector<string> res;
     if(carpeta=="job_events")
     {
         job_events A;
@@ -49,26 +48,26 @@ string select(string ID,string carpeta)
     }
     else if(carpeta=="machine_attributes")
     {
-        machine_attributes A;
-        respuesta=A.selectMA(ID);
+        machine_attributes B;
+        respuesta=B.selectMA(ID);
         return respuesta;
     }
     else if(carpeta=="machine_events")
     {
-        machine_events A;
-        respuesta=A.selectME(ID);
+        machine_events C;
+        respuesta=C.selectME(ID);
         return respuesta;
     }
     else if(carpeta=="task_constraints")
     {
-        task_constraints A;
-        respuesta=A.selectTC(ID);
+        task_constraints D;
+        respuesta=D.selectTC(ID);
         return respuesta;
     }
     else if(carpeta=="task_events")
     {
-        task_events A;
-        ///A.selectTE(ID);
+        task_events E;
+        ///E.selectTE(ID);
         return respuesta;
     }
     else
@@ -81,27 +80,27 @@ string update(string ID,string c2,string carpeta)
     if(carpeta=="job_events")
     {
         job_events A;
-        A.update(ID,c2);
+        return A.update(ID,c2);
     }
     else if(carpeta=="machine_attributes")
     {
         machine_attributes A;
-        A.update(ID,c2);
+        return A.update(ID,c2);
     }
     else if(carpeta=="machine_events")
     {
         machine_events A;
-        A.update(ID,c2);
+        return A.update(ID,c2);
     }
     else if(carpeta=="task_constraints")
     {
         task_constraints A;
-        A.update(ID,c2);
+        return A.update(ID,c2);
     }
     else if(carpeta=="task_events")
     {
         task_events A;
-        A.update(ID,c2);
+        return A.update(ID,c2);
     }
     else
         return "No se tiene la tabla a buscar.";
@@ -109,7 +108,7 @@ string update(string ID,string c2,string carpeta)
 
 int main()
 {
-    /**int opc;
+    int opc;
     cout<<"---BIENVENIDOS A NUESTRO MOTOR DE BASE DE DATOS---"<<endl;
     while(true)
     {
@@ -131,8 +130,7 @@ int main()
             string ID,archivo;
             cout<<"Ingrese indice seguido de la tabla que desea seleccionar"<<endl;
             cin>>ID>>archivo;
-            cout<<select(ID,archivo);
-            cout<<"Seleccion hecha correctamente :3"<<endl;
+            cout<<select(ID,archivo)<<endl;
         }
         else if(opc==3)
         {
@@ -140,13 +138,12 @@ int main()
             cout<<"Ingrese indice seguido del segundo campo y despues la tabla que desea actualizar"<<endl;
             cin>>ID>>C2>>archivo;
             cout<<update(ID,C2,archivo);
-            cout<<"Actualizacion hecha correctamente :3"<<endl;
         }
         else if(opc==4)
         {
             break;
         }
-    }*/
+    }
 
     return 0;
 }
