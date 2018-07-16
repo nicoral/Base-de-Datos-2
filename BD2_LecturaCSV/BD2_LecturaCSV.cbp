@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Bloqueos.h" />
 		<Unit filename="EArbol.h" />
 		<Unit filename="FBasicas.h" />
 		<Unit filename="Hash.h" />
@@ -41,6 +42,7 @@
 		<Unit filename="includes.h" />
 		<Unit filename="indices.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="update.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

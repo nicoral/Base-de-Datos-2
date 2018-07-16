@@ -25,6 +25,7 @@ public:
     void indicesJE();
     char *selectJE(string ID);
     string update(string ID);
+    string Delete(string ID);
 };
 class machine_attributes
 {
@@ -47,6 +48,7 @@ public:
     void indicesMA();
     char *selectMA(string ID);
     string update(string ID);
+    string Delete(string ID);
 };
 class machine_events
 {
@@ -70,6 +72,7 @@ public:
     void indicesME();
     string selectME(string ID);
     string update(string ID);
+    string Delete(string ID);
 };
 class task_constraints
 {
@@ -93,6 +96,7 @@ public:
     void indicesTC();
     char *selectTC(string ID);
     string update(string ID);
+    string Delete(string ID);
 };
 class task_events
 {
@@ -121,8 +125,9 @@ public:
     bool Estado();
     void indicesTE();
     void indices2TE();
-    char *selectTE(char* ID);
+    char *selectTE(string ID);
     string update(string ID);
+    string Delete(string ID);
 };
 
 

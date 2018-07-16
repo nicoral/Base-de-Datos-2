@@ -132,7 +132,6 @@ string machine_events::selectME(string ID)
         {
             HashKey.getline(linea,10000,',');
             ids=linea;
-            cout<<ids<<" "<<ID<<endl;
             if(ID==ids)
             {
                 HashKey.getline(linea,10000);
@@ -226,11 +225,13 @@ char *task_constraints::selectTC(string ID)
 
     }
 }
-char *task_events::selectTE(char* ID)
+char *task_events::selectTE(string ID)
 {
     char *linea=new char[10000];
     int divi=0;
-    long long int IDn=atoll(ID),aux=-1,aux2;
+    char *a=new char[ID.length()+1];
+    strcpy(a, ID.c_str());
+    long long int IDn=atoll(a),campo1,campo2=0,campo3;
     char* ids=new char[1000];
     bool encontrado=false;
     for(int i=0;i<5;i++)
@@ -244,73 +245,52 @@ char *task_events::selectTE(char* ID)
         {
             while(!csv.eof())
             {
-
-                csv.getline(linea,10000,',');
-                ids=linea;
-                aux=atoll(ids);
-                if(IDn<=aux)
+                csv.getline(linea,1000,',');
+                campo1=atoll(linea);
+                if(IDn>campo1)
                 {
-                    csv.getline(linea,1000,',');
-                    aux2=atoll(linea);
+                    csv.getline(linea,1000);
+                    campo2=atoll(linea);
                 }
                 else
                 {
-                    ifstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
-                    indi.seekg(aux2,ios::beg);
-                    while(IDn<aux && !indi.eof())
-                    {
-                        indi.getline(linea,1000,',');
-                        aux2=atoll(linea);
-                        if(IDn==aux2)
-                        {
-                            encontrado=true;
-                            break;
-                        }
-                        else
-                        {
-                            indi.getline(linea,1000);
-                        }
-                    }
-                    if(encontrado)
-                        break;
-                    else if(indi.eof())
-                    {
-                        ifstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
-                        indi.seekg(aux2,ios::beg);
-                        while(IDn<aux && !indi.eof())
-                        {
-                            indi.getline(linea,1000,',');
-                            aux2=atoll(linea);
-                            if(IDn==aux2)
-                            {
-                                encontrado=true;
-                                break;
-                            }
-                            else
-                            {
-                                indi.getline(linea,1000);
-                            }
-                        }
-                    }
-                }
-            }//Seguir desde aqui!!!
-            if(encontrado)
-            {
-                ifstream is("google/"+this->archivo+"/part-"+numero(divi)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
-                if (!is)
-                {
-                    return "Error al abrir el archivo";
-                }
-                else
-                {
-                    int n=atoll(linea);
-                    is.seekg(n,ios::beg);
-                    ///is.getline(linea,1000);
-                    is>>linea;
-                    return linea;
+                    encontrado=true;
+                    csv.close();
+                    break;
                 }
             }
-            return ("NO SE ENCONTRO INDICE A BUSCAR!!!!GG");
+            if(encontrado)
+            {
+                ifstream is("indices/"+this->archivo+"/"+this->archivo+"-"+numero(i)+".txt",std::fstream::binary);
+                is.seekg(campo2,ios::beg);
+                while(!is.eof())
+                {
+                    is.getline(linea,1000,',');
+                    if(ID==linea)
+                    {
+
+                        while(ID==linea)
+                        {
+                            is.getline(linea,1000,',');
+                            campo2=atoll(linea);
+                            is.getline(linea,1000);
+                            campo3=atoll(linea);
+                            ifstream iss("google/"+this->archivo+"/part-"+numero(campo3)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
+                            iss.seekg(campo2,ios::beg);
+                            iss.getline(linea,1000);
+                            cout<<linea<<endl;
+                            iss.close();
+                            is.getline(linea,1000,',');
+                        }
+                        return "Seleccion hecha exitosamente";
+                    }
+                    else
+                    {
+                        is.getline(linea,1000);
+                    }
+                }
+                return "No se encontro los indices";
+            }
         }
     }
 }

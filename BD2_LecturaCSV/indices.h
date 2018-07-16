@@ -34,14 +34,16 @@ void task_events::indicesTE()
                     ID.push_back(neew);
                     if(ID.size()>33461309)
                     {
+                        cont=0;
                         sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
                         ofstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(c)+".txt");
                         ofstream ClusterKeys ("indices/"+this->archivo+"/ClusterKey-"+this->archivo+"-"+numero(c)+".txt");
                         for(int i=0;i<ID.size();i++)
                         {
+
                             if(temp!=ID[i].ID &&temp<ID[i].ID)
                             {
-                                if(cont==10001 || cont==0)
+                                if(cont==5000)
                                 {
                                     posicion=indi.tellp();
                                     ClusterKeys<<ID[i].ID<<','<<posicion<<endl;
@@ -52,7 +54,7 @@ void task_events::indicesTE()
                             }
                             indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
                         }
-                        cont=0;
+
                         indi.close();
                         ClusterKeys.close();
                         ID.clear();
@@ -73,10 +75,10 @@ void task_events::indicesTE()
     {
         if(temp!=ID[i].ID &&temp<ID[i].ID)
         {
+            posicion=indi.tellp();
             cont++;
-            if(cont==10000 || cont==0)
+            if(cont==5000)
             {
-                posicion=indi.tellp();
                 ClusterKeys<<ID[i].ID<<','<<posicion<<endl;
                 cont=1;
             }
@@ -84,6 +86,7 @@ void task_events::indicesTE()
         }
         indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
     }
+    ClusterKeys<<ID[ID.size()-1].ID<<','<<posicion;
     indi.close();
     ClusterKeys.close();
     ID.clear();

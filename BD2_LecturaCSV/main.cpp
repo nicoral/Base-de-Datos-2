@@ -1,63 +1,63 @@
-#include "Bloqueos.h"
+#include "Delete.h"
 #include "EArbol.h"
+machine_attributes MA;
+machine_events ME;
+job_events JE;
+task_constraints TC;
+task_events TE;
 
 void indices(string carpeta)
 {
     string respuesta;
     if(carpeta=="job_events")
     {
-        job_events A;
-        while(A.Estado())
+        while(JE.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        A.indicesJE();
-        A.desbloquear();
+        JE.bloquear();
+        JE.indicesJE();
+        JE.desbloquear();
     }
     else if(carpeta=="machine_attributes")
     {
-        machine_attributes A;
-        while(A.Estado())
+        while(MA.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        A.indicesMA();
-        A.desbloquear();
+        MA.bloquear();
+        MA.indicesMA();
+        MA.desbloquear();
     }
     else if(carpeta=="machine_events")
     {
-        machine_events A;
-        while(A.Estado())
+        while(ME.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        A.indicesME();
-        A.desbloquear();
+        ME.bloquear();
+        ME.indicesME();
+        ME.desbloquear();
     }
     else if(carpeta=="task_constraints")
     {
-        task_constraints A;
-        while(A.Estado())
+        while(TC.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        A.indicesTC();
-        A.desbloquear();
+        TC.bloquear();
+        TC.indicesTC();
+        TC.desbloquear();
     }
     else if(carpeta=="task_events")
     {
-        task_events A;
-        while(A.Estado())
+        while(TE.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        A.indicesTE();
-        A.desbloquear();
+        TE.bloquear();
+        TE.indicesTE();
+        TE.desbloquear();
     }
     else
         cout<<"No se tiene la tabla a buscar."<<endl;
@@ -68,52 +68,47 @@ string select(string ID,string carpeta)
     string respuesta;
     if(carpeta=="job_events")
     {
-        job_events A;
-        while(A.Estado())
+        while(JE.Estado())
         {
             Sleep(5000);
         }
-        respuesta=A.selectJE(ID);
+        respuesta=JE.selectJE(ID);
         return respuesta;
     }
     else if(carpeta=="machine_attributes")
     {
-        machine_attributes B;
-        while(B.Estado())
+        while(MA.Estado())
         {
             Sleep(5000);
         }
-        respuesta=B.selectMA(ID);
+        respuesta=MA.selectMA(ID);
         return respuesta;
     }
     else if(carpeta=="machine_events")
     {
-        machine_events C;
-        while(C.Estado())
+        while(ME.Estado())
         {
             Sleep(5000);
         }
-        respuesta=C.selectME(ID);
+        respuesta=ME.selectME(ID);
         return respuesta;
     }
     else if(carpeta=="task_constraints")
     {
-        task_constraints D;
-        while(D.Estado())
+        while(TC.Estado())
         {
             Sleep(5000);
         }
-        respuesta=D.selectTC(ID);
+        respuesta=TC.selectTC(ID);
         return respuesta;
     }
     else if(carpeta=="task_events")
     {
-        task_events E;
-        while(E.Estado())
+        while(TE.Estado())
         {
             Sleep(5000);
         }
-        ///E.selectTE(ID);
+        respuesta=TE.selectTE(ID);
         return respuesta;
     }
     else
@@ -122,65 +117,121 @@ string select(string ID,string carpeta)
 string update(string ID,string carpeta)
 {
     string respuesta;
-    vector<string> res;
     if(carpeta=="job_events")
     {
-        job_events A;
-        while(A.Estado())
+        while(JE.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        respuesta=A.update(ID);
-        A.desbloquear();
+        JE.bloquear();
+        respuesta=JE.update(ID);
+        JE.desbloquear();
         return respuesta;
     }
     else if(carpeta=="machine_attributes")
     {
-        machine_attributes A;
-        while(A.Estado())
+        while(MA.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        respuesta=A.update(ID);
-        A.desbloquear();
+        MA.bloquear();
+        respuesta=MA.update(ID);
+        MA.desbloquear();
         return respuesta;
     }
     else if(carpeta=="machine_events")
     {
-        machine_events A;
-        while(A.Estado())
+        while(ME.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        respuesta=A.update(ID);
-        A.desbloquear();
+        ME.bloquear();
+        respuesta=ME.update(ID);
+        ME.desbloquear();
         return respuesta;
     }
     else if(carpeta=="task_constraints")
     {
-        task_constraints A;
-        while(A.Estado())
+        while(TC.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        respuesta=A.update(ID);
-        A.desbloquear();
+        TC.bloquear();
+        respuesta=TC.update(ID);
+        TC.desbloquear();
         return respuesta;
     }
     else if(carpeta=="task_events")
     {
-        task_events A;
-        while(A.Estado())
+        while(TE.Estado())
         {
             Sleep(5000);
         }
-        A.bloquear();
-        respuesta=A.update(ID);
-        A.desbloquear();
+        TE.bloquear();
+        respuesta=TE.update(ID);
+        TE.desbloquear();
+        return respuesta;
+    }
+    else
+        return "No se tiene la tabla a buscar.";
+}
+
+string Delete(string ID,string carpeta)
+{
+    string respuesta;
+    if(carpeta=="job_events")
+    {
+        while(JE.Estado())
+        {
+            Sleep(5000);
+        }
+        JE.bloquear();
+        respuesta=JE.Delete(ID);
+        JE.desbloquear();
+        return respuesta;
+    }
+    else if(carpeta=="machine_attributes")
+    {
+        while(MA.Estado())
+        {
+            Sleep(5000);
+        }
+        MA.bloquear();
+        respuesta=MA.Delete(ID);
+        MA.desbloquear();
+        return respuesta;
+    }
+    else if(carpeta=="machine_events")
+    {
+        while(ME.Estado())
+        {
+            Sleep(5000);
+        }
+        ME.bloquear();
+        respuesta=ME.Delete(ID);
+        ME.desbloquear();
+        return respuesta;
+    }
+    else if(carpeta=="task_constraints")
+    {
+        while(TC.Estado())
+        {
+            Sleep(5000);
+        }
+        TC.bloquear();
+        respuesta=TC.Delete(ID);
+        TC.desbloquear();
+        return respuesta;
+    }
+    else if(carpeta=="task_events")
+    {
+        while(TE.Estado())
+        {
+            Sleep(5000);
+        }
+        TE.bloquear();
+        respuesta=TE.Delete(ID);
+        TE.desbloquear();
         return respuesta;
     }
     else
@@ -189,7 +240,7 @@ string update(string ID,string carpeta)
 
 int main()
 {
-    int opc;
+    string opc;
     cout<<"---BIENVENIDOS A NUESTRO MOTOR DE BASE DE DATOS---"<<endl;
     while(true)
     {
@@ -198,30 +249,42 @@ int main()
         cout<<"3.- Actualizar datos de una tabla:"<<endl;
         cout<<"4.- Exit:"<<endl;
         cin>>opc;
-        if(opc==1)
+        if(opc=="1")
         {
             string archivo;
             cout<<"Ingrese tabla a indexar"<<endl;
             cin>>archivo;
             indices(archivo);
         }
-        else if(opc==2)
+        else if(opc=="2")
         {
-            string ID,archivo;
+            string ID;
+            string archivo;
             cout<<"Ingrese indice seguido de la tabla que desea seleccionar"<<endl;
             cin>>ID>>archivo;
             cout<<select(ID,archivo)<<endl;
         }
-        else if(opc==3)
+        else if(opc=="3")
         {
             string ID,archivo;
-            cout<<"Ingrese indice seguido del segundo campo y despues la tabla que desea actualizar"<<endl;
+            cout<<"Ingrese indice y despues la tabla que desea actualizar"<<endl;
             cin>>ID>>archivo;
-            cout<<update(ID,archivo);
+            cout<<update(ID,archivo)<<endl;
         }
-        else if(opc==4)
+        else if(opc=="4")
+        {
+            string ID,archivo;
+            cout<<"Ingrese indice y despues la tabla que desea eliminar"<<endl;
+            cin>>ID>>archivo;
+            cout<<Delete(ID,archivo)<<endl;
+        }
+        else if(opc=="5")
         {
             break;
+        }
+        else
+        {
+            cout<<"Opcion incorrecta :("<<endl;
         }
     }
     return 0;
