@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1531952101 source:d:\c++\bd2_lecturacsv\main.cpp
+	"insert.h"
+	"EArbol.h"
+
+1530489749 d:\c++\bd2_lecturacsv\earbol.h
+	"includes.h"
+
+1531456965 d:\c++\bd2_lecturacsv\includes.h
+	<iostream>
+	<stack>
+	<cstring>
+	<string>
+	<queue>
+	<vector>
+	<cstdlib>
+	<stdlib.h>
+	<sstream>
+	<fstream>
+	<string>
+	<windows.h>
+	<algorithm>
+	<stdio.h>
+
+1531952054 d:\c++\bd2_lecturacsv\tablas.h
+	"Hash.h"
+	"FBasicas.h"
+	"PrymariQueue.h"
+
+1531771688 d:\c++\bd2_lecturacsv\indices.h
+	"Tablas.h"
+
+1531710485 d:\c++\bd2_lecturacsv\fbasicas.h
+	"includes.h"
+
+1531790225 d:\c++\bd2_lecturacsv\select.h
+	"indices.h"
+
+1530582861 d:\c++\bd2_lecturacsv\hash.h
+	"includes.h"
+
+1530678103 d:\c++\bd2_lecturacsv\prymariqueue.h
+	<queue>
+
+1531952054 d:\c++\bd2_lecturacsv\update.h
+	"Select.h"
+
+1531771827 d:\c++\bd2_lecturacsv\bloqueos.h
+	"update.h"
+
+1531935072 d:\c++\bd2_lecturacsv\delete.h
+	"Bloqueos.h"
+
+1531952187 d:\c++\bd2_lecturacsv\insert.h
+	"Delete.h"
+

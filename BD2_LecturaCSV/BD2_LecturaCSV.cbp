@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Bloqueos.h" />
+		<Unit filename="Delete.h" />
 		<Unit filename="EArbol.h" />
 		<Unit filename="FBasicas.h" />
 		<Unit filename="Hash.h" />

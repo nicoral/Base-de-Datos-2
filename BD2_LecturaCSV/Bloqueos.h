@@ -8,6 +8,14 @@ void machine_attributes::desbloquear()
 {
     this->bloqueada=false;
 }
+void task_usage::bloquear()
+{
+    this->bloqueada=true;
+}
+void task_usage::desbloquear()
+{
+    this->bloqueada=false;
+}
 void machine_events::bloquear()
 {
     this->bloqueada=true;
@@ -61,5 +69,8 @@ bool job_events::Estado()
 {
     return this->bloqueada;
 }
-
+bool task_usage::Estado()
+{
+    return this->bloqueada;
+}
 

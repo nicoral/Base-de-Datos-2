@@ -1,11 +1,11 @@
-#include "Delete.h"
+#include "insert.h"
 #include "EArbol.h"
 machine_attributes MA;
 machine_events ME;
 job_events JE;
 task_constraints TC;
 task_events TE;
-
+task_usage TU;
 void indices(string carpeta)
 {
     string respuesta;
@@ -18,6 +18,16 @@ void indices(string carpeta)
         JE.bloquear();
         JE.indicesJE();
         JE.desbloquear();
+    }
+    else if(carpeta=="task_usage")
+    {
+        while(TU.Estado())
+        {
+            Sleep(5000);
+        }
+        TU.bloquear();
+        TU.indicesTU();
+        TU.desbloquear();
     }
     else if(carpeta=="machine_attributes")
     {
@@ -109,6 +119,15 @@ string select(string ID,string carpeta)
             Sleep(5000);
         }
         respuesta=TE.selectTE(ID);
+        return respuesta;
+    }
+    else if(carpeta=="task_usage")
+    {
+        while(TE.Estado())
+        {
+            Sleep(5000);
+        }
+        respuesta=TU.selectTU(ID);
         return respuesta;
     }
     else
@@ -246,8 +265,9 @@ int main()
     {
         cout<<"1.- Indexar una tabla:"<<endl;
         cout<<"2.- Seleccionar por indice de una tabla:"<<endl;
-        cout<<"3.- Actualizar datos de una tabla:"<<endl;
-        cout<<"4.- Exit:"<<endl;
+        cout<<"3.- Actualizar registro de la BD:"<<endl;
+        cout<<"4.- Eliminar registro de la BD:"<<endl;
+        cout<<"5.- Exit:"<<endl;
         cin>>opc;
         if(opc=="1")
         {

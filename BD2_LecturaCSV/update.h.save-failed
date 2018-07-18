@@ -1,0 +1,105 @@
+#include "Select.h"
+
+string job_events::update(string ID,string C2)
+{
+    char *linea=new char[10000];
+    char *seg=new char[10000];
+    char* aux=new char[1000];
+    vector<string> auxV;
+    int divi=0;
+    string ids,Newline;
+    bool encontrado=false;
+
+    cout<<"Introducir el nuevo valor para el campo TimeSpamp"<<endl;cin>>aux;cout<<aux<<endl;
+    if(!esNumero(aux))return "Error de Formato";
+    cout<<"Introducir el nuevo valor para el campo Missing_Info"<<endl;cin>>this->missing_info;
+    cout<<"Introducir el nuevo valor para el campo Event_Type"<<endl;cin>>this->event_type;
+    cout<<"Introducir el nuevo valor para el campo User_Name"<<endl;cin>>this->user_name;
+    cout<<"Introducir el nuevo valor para el campo Scheduling_Class"<<endl;cin>>this->scheduling_class;
+    cout<<"Introducir el nuevo valor para el campo Logical_Job_Name"<<endl;cin>>this->logical_job_name;
+    string str(aux);
+    Newline=str+','+ID+','+this->missing_info+','+this->event_type+','+this->user_name+','+this->scheduling_class+','+this->logical_job_name;
+    cout<<Newline<<endl;
+    ifstream HashKey("indices/HashKey-"+this->archivo+".txt");
+    if (!HashKey)
+    {
+
+        return ("No se encuentra la tabla a buscar");
+    }
+    else
+    {
+        while(!HashKey.eof())
+        {
+            HashKey.getline(linea,10000,',');
+            ids=linea;
+            if(ID==ids)
+            {
+                HashKey.getline(linea,10000);
+                encontrado=true;
+                break;
+            }
+            else
+                HashKey.getline(linea,10000);
+        }
+    }
+    if(encontrado)
+    {
+        long int n=atoi(linea),s;
+        ifstream csv("indices/"+this->archivo+".txt");
+        csv.seekg(n,ios::beg);
+        csv.getline(linea,10000,',');
+        if(ID==linea)
+        {
+
+            csv.getline(linea,1000,',');
+            csv.getline(seg,1000);
+            n=atoi(linea);
+            s=atoi(seg);
+            ifstream is("google/"+this->archivo+"/part-"+numero(s)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
+            while(is.eof())
+            {
+
+                string nuevo;
+                if(n==is.tellg())
+                {
+                    auxV.push_back(Newline);
+                    is.getline(linea,10000);
+
+                }
+                else
+                {
+                    is.getline(linea,10000);
+                    auxV.push_back(linea);
+                    cout<<linea<<endl;
+                }
+            }
+//3418319 dasd job_events
+            is.close();
+            /**ofstream os("google/"+this->archivo+"/part-"+numero(s)+"-of-"+numero(this->cantidad)+".csv",std::fstream::binary);
+            for(int j=0;j<auxV.size();j++)
+            {
+                cout<<auxV[j]<<endl;
+            }*//
+
+
+            cout<<"llego"<<endl;
+            return "Linea modificada";
+        }
+    }
+}
+string machine_attributes::update(string ID,string C2)
+{
+
+}
+string machine_events::update(string ID,string C2)
+{
+
+}
+string task_constraints::update(string ID,string C2)
+{
+
+}
+string task_events::update(string ID,string C2)
+{
+
+}
