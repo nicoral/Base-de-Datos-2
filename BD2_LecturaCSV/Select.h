@@ -240,7 +240,6 @@ char *task_constraints::selectTC(string ID)
 char *task_events::selectTE(string ID)
 {
     char *linea=new char[10000];
-    int divi=0;
     char *a=new char[ID.length()+1];
     strcpy(a, ID.c_str());
     long long int IDn=atoll(a),campo1,campo2=0,campo3;
@@ -260,6 +259,11 @@ char *task_events::selectTE(string ID)
                 csv.getline(linea,1000,',');
                 campo1=atoll(linea);
                 if(IDn>campo1)
+                {
+                    csv.getline(linea,1000);
+                    campo2=atoll(linea);
+                }
+                else if(IDn==campo1)
                 {
                     csv.getline(linea,1000);
                     campo2=atoll(linea);
@@ -298,16 +302,17 @@ char *task_events::selectTE(string ID)
                             is.getline(linea,1000,',');
                         }
                         return "Seleccion hecha exitosamente";
+
                     }
                     else
                     {
                         is.getline(linea,1000);
                     }
                 }
-                return "No se encontro los indices";
             }
         }
     }
+
 }
 char* task_usage::selectTU(string ID)
 {
@@ -335,6 +340,12 @@ char* task_usage::selectTU(string ID)
                 {
                     csv.getline(linea,1000);
                     campo2=atoll(linea);
+                }
+                else if(IDn==campo1)
+                {
+                    csv.getline(linea,1000);
+                    campo2=atoll(linea);
+                    break;
                 }
                 else
                 {

@@ -53,37 +53,6 @@ string numero(int n)
     for(auto n:hola) num+=n;
     return num;
 }
-const vector<string> explode(const string& linea,int indi)
-{
-	string buff{""};
-	vector<string> v;
-    const char& c=',';
-    int cont=0;
-	for(int i=0;i<linea.length() && cont<=indi;i++)
-	{
-		if(linea[i]!= c) buff+=linea[i];
-		if(linea[i] == c && buff != "") { v.push_back(buff); buff = "";cont++; }
-		if(linea[i] == c && linea[i-1]==c){v.push_back("0");cont++;}
-	}
-	if(buff != "") v.push_back(buff);
-
-	return v;
-}
-const vector<string> explodeFull(const string& linea)
-{
-	string buff{""};
-	vector<string> v;
-    const char& c=',';
-	for(int i=0;i<linea.length();i++)
-	{
-		if(linea[i]!= c) buff+=linea[i];
-		if(linea[i] == c && buff != "") { v.push_back(buff); buff = ""; }
-		if(linea[i] == c && linea[i-1]==c){v.push_back("0");}
-	}
-	if(buff != "") v.push_back(buff);
-
-	return v;
-}
 bool esNumero(char* num)
 {
 

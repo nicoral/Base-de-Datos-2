@@ -1,4 +1,4 @@
-#include "Tablas.h"
+#include "NewLine.h"
 void task_usage::indicesTU()
 {
     char *linea=new char[1000];
@@ -21,7 +21,7 @@ void task_usage::indicesTU()
             posicion=archivo.tellg();
             while(!archivo.eof() )
             {
-                if(posi!=3)
+                if(posi!=this->indice)
                 {
                     archivo.getline(linea,1000,',');
                     posi++;
@@ -35,7 +35,6 @@ void task_usage::indicesTU()
                     {
                         cont=0;
                         sort(ID.begin(),ID.end(),[](const Datos& datos1,const Datos& datos2){return (datos1.ID<datos2.ID);});
-                        ofstream HashKey("indices/"+this->archivo+"/HashKey-"+this->archivo+"-"+numero(c)+".txt");
                         ofstream indi("indices/"+this->archivo+"/"+this->archivo+"-"+numero(c)+".txt");
                         ofstream ClusterKeys ("indices/"+this->archivo+"/ClusterKey-"+this->archivo+"-"+numero(c)+".txt");
                         for(int i=0;i<ID.size();i++)
@@ -49,13 +48,11 @@ void task_usage::indicesTU()
                                     ClusterKeys<<ID[i].ID<<','<<posicion<<endl;
                                     cont=1;
                                 }
-                                HashKey<<ID[i].ID<<','<<indi.tellp()<<endl;
                                 cont++;
                                 temp=ID[i].ID;
                             }
                             indi<< ID[i].ID <<','<< ID[i].posicion <<','<< ID[i].Parchivo <<endl;
                         }
-                        HashKey.close();
                         indi.close();
                         ClusterKeys.close();
                         ID.clear();
@@ -123,7 +120,8 @@ void task_events::indicesTE()
                 {
                     long long int dato=atoll(linea);
                     Datos neew(dato,posicion,i);
-                    ID.push_back(neew);
+                    if(dato!=0&& posicion!=0)
+                        ID.push_back(neew);
                     if(ID.size()>33461309)
                     {
                         cont=0;

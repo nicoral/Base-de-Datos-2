@@ -37,6 +37,7 @@
 		<Unit filename="EArbol.h" />
 		<Unit filename="FBasicas.h" />
 		<Unit filename="Hash.h" />
+		<Unit filename="NewLine.h" />
 		<Unit filename="PrymariQueue.h" />
 		<Unit filename="Select.h" />
 		<Unit filename="Tablas.h" />

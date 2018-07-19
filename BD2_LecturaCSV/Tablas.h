@@ -23,10 +23,11 @@ public:
     void desbloquear();
     bool Estado();
     void indicesJE();
-    void insertJE(string ID,string newline);
+    string insertJE(string ID,string newline);
     char *selectJE(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 class machine_attributes
 {
@@ -46,10 +47,11 @@ public:
     void desbloquear();
     bool Estado();
     void indicesMA();
-    void insertMA(string ID,string newline);
+    string insertMA(string ID,string newline);
     char *selectMA(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 class machine_events
 {
@@ -70,10 +72,11 @@ public:
     void desbloquear();
     bool Estado();
     void indicesME();
-    void insertME(string ID,string newline);
+    string insertME(string ID,string newline);
     string selectME(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 class task_constraints
 {
@@ -82,7 +85,7 @@ public:
     int job_ID;
     int task_index;
     string attribute_name;
-    char comparison_operator;
+    string comparison_operator;
     string attribute_value;
 
     int cantidad=500;
@@ -94,10 +97,11 @@ public:
     void desbloquear();
     bool Estado();
     void indicesTC();
-    void insertTC(string ID,string newline);
+    string insertTC(string ID,string newline);
     char *selectTC(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 class task_events
 {
@@ -125,25 +129,47 @@ public:
     bool Estado();
     void indicesTE();
     void indices2TE();
-    void insertTE(string ID,string newline);
+    string insertTE(string ID,string newline);
     char *selectTE(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 class task_usage
 {
 public:
+    int start_time;
+    int end_time;
+    int task_index;
+    string machine_ID;
+    string mean_CPU_usage_rate;
+    string canonical_memory_usage;
+    string assigned_memory_usage;
+    string unmapped_page_cache_memory_usage;
+    string total_page_cache_memory_usage;
+    string maximun_memory_usage;
+    string mean_disk_IO_time;
+    string mean_local_disk_space_used;
+    string maximun_CPU_usage;
+    string maximun_disk_IO_time;
+    string cycles_per_instruction_CPI;
+    string memory_accesses_per_instruction_MAI;
+    string sample_portion;
+    string aggregation_type;
+    string sampled_CPU_usage;
+
     int cantidad=500;
     string archivo="task_usage";
-    int indice=4;
+    int indice=3;
     bool bloqueada=false;
     void bloquear();
     void desbloquear();
     bool Estado();
     void indicesTU();
-    void insertTU(string ID,string newline);
+    string insertTU(string ID,string newline);
     char *selectTU(string ID);
-    string update(string ID);
+    string update(string ID,string NewLine);
     string Delete(string ID);
+    string NewLine(string ID);
 };
 
